@@ -35,3 +35,21 @@ let createPic = (title: string, date: string, size?: SquareSize): object => {
 
 const picture = createPic("Platzi session", "2020/03/10", "100x100");
 console.log("picture", picture);
+
+/* Return types with typescript */
+
+function handleError(code: number, message: string): never | string {
+  /* Code Procces, message */
+  if (message === "error") {
+    throw new Error(`${message}. Code Error: ${code}`);
+  } else {
+    return "An error has ocurred";
+  }
+}
+
+try {
+  let result = handleError(200, "OK"); // string
+  console.log("result", result);
+  let result = handleError(404, "error"); // never
+  console.log("result", result);
+} catch (error) {}
