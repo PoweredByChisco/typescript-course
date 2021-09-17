@@ -9,9 +9,9 @@ enum PhotoOrientation {
 
 class Picture {
   /* Properties */
-  id: number;
-  title: string;
-  orientation: PhotoOrientation;
+  private id: number; /* Explicit */
+  private title: string;
+  private orientation: PhotoOrientation;
 
   constructor(id: number, title: string, orientation: PhotoOrientation) {
     this.id = id;
@@ -20,7 +20,8 @@ class Picture {
   }
 
   /* Behaviour */
-  toString() {
+  private toString() {
+    /* Explicit */
     return `[id: ${this.id}, title: ${this.title}, orientation: ${this.orientation}]`;
   }
 }
@@ -36,7 +37,7 @@ class Album {
     this.pictures = [];
   }
 
-  addPicture(picture: Picture) {
+  private addPicture(picture: Picture) {
     this.pictures.push(picture);
   }
 } /* This class require another class of the type Picture if we want to use the method addPicture */
@@ -49,7 +50,11 @@ const picture: Picture = new Picture(
   "Platzi session",
   PhotoOrientation.Square
 );
-album.addPicture(picture);
+album.addPicture(picture); /* We don't access to this method */
 
 /* We chain each object into another object related  */
 console.log("Album", album);
+
+/* Accessing to public members */
+/* If we want to modificate the properties of an object we can do it, but this is because the default setting o each properties is public, hovewer we can change those to private and cannot modify outsite of the class ambit*/
+picture.id = 100;
